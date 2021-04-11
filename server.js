@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/Workout";
 
 const PORT = process.env.PORT || 3000
 

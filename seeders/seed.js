@@ -1,5 +1,6 @@
 let mongoose = require("mongoose");
-let db = require("../models");
+// let db = require("../models");
+const mongojs = require("mongojs");
 
 mongoose.connect("mongodb://localhost/workout", {
   useNewUrlParser: true,
@@ -124,13 +125,24 @@ let workoutSeed = [
   }
 ];
 
-db.Workout.deleteMany({})
-  .then(() => db.Workout.collection.insertMany(workoutSeed))
-  .then(data => {
-    console.log(data.result.n + " records inserted!");
-    process.exit(0);
-  })
-  .catch(err => {
+const databaseUrl = "Workout";
+const collections = ["exercise"];
+
+const db = mongojs(databaseUrl, collections);
+
+db.on("error", error => {
+  console.log("Database Error:", error);
+});
+
+db.exercise.remove({});
+db.exercise.insertMany(workoutSeed, (err, data) => {
+  console.log(data);
+  if (err) {
     console.error(err);
-    process.exit(1);
-  });
+  } else {
+    console.log(data.length + " records inserted!");
+    process.exit(0);
+  }  
+  
+process.exit(1);
+});
