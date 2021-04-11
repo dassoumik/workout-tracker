@@ -136,7 +136,6 @@ db.on("error", error => {
 
 db.exercise.remove({});
 db.exercise.insertMany(workoutSeed, (err, data) => {
-  console.log(data);
   if (err) {
     console.error(err);
   } else {
