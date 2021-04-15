@@ -97,6 +97,7 @@ function validateInputs() {
 
 async function handleFormSubmit(event) {
   event.preventDefault();
+  console.log("event", event);
 
   let workoutData = {};
 
@@ -113,7 +114,7 @@ async function handleFormSubmit(event) {
     workoutData.reps = Number(repsInput.value.trim());
     workoutData.duration = Number(resistanceDurationInput.value.trim());
   }
-
+  console.log(workoutData);
   await API.addExercise(workoutData);
   clearInputs();
   toast.classList.add("success");
@@ -122,7 +123,7 @@ async function handleFormSubmit(event) {
 function handleToastAnimationEnd() {
   toast.removeAttribute("class");
   if (shouldNavigateAway) {
-    location.href = "/";
+    location.href = "/stats.html";
   }
 }
 
@@ -142,7 +143,7 @@ if (workoutTypeSelect) {
 }
 if (completeButton) {
   completeButton.addEventListener("click", function (event) {
-    shouldNavigateAway = true;
+    // shouldNavigateAway = true;
     handleFormSubmit(event);
   });
 }

@@ -1,4 +1,5 @@
 const express = require("express");
+const router = require("./routes/api/workouts");
 const mongoose = require("mongoose");
 var url = "mongodb://localhost:27017/Workout";
 
