@@ -100,6 +100,7 @@ async function handleFormSubmit(event) {
   console.log("event", event);
 
   let workoutData = {};
+  workoutData.day = new Date(new Date().setDate(new Date().getDate()));
 
   if (workoutType === "cardio") {
     workoutData.type = "cardio";
