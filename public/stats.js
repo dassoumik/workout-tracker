@@ -22,7 +22,11 @@ function generatePalette() {
 }
 
 function populateChart(data) {
-  let durations = data.map(({ totalDuration }) => totalDuration);
+  let totalDuration = 0;
+  console.log(data);
+  // console.log(data.map({duration}));
+  let durations = data.exercises.map(({ duration }) => totalDuration = totalDuration + duration);
+  console.log(durations);
   let pounds = calculateTotalWeight(data);
   let workouts = workoutNames(data);
   const colors = generatePalette();
@@ -46,7 +50,7 @@ function populateChart(data) {
     const date = new Date(day);
     return daysOfWeek[date.getDay()];
 
-    lineChart();
+    lineChart(); barChart(); pieChart(); donutChart();
   });
 
   let lineChart = new Chart(line, {
