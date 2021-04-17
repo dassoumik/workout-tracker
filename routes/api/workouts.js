@@ -86,4 +86,17 @@ router.get("/api/exercise/:id", (req, res) => {
 
 });
 
+
+router.get("/api/workouts/range", (req, res) => {
+  db.exercise.find({}).limit(7)
+    .sort({ date: -1 },
+    (error, dbExercise) => {
+      if (error) {
+          res.send(error);
+        } else {
+          res.json(dbExercise);
+        }
+    })
+});
+
 module.exports = router;

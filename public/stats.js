@@ -45,6 +45,8 @@ function populateChart(data) {
   const labels = data.map(({ day }) => {
     const date = new Date(day);
     return daysOfWeek[date.getDay()];
+
+    lineChart();
   });
 
   let lineChart = new Chart(line, {
