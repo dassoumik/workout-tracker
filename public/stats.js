@@ -23,9 +23,6 @@ function generatePalette() {
 
 function populateChart(data) {
   let totalDuration = 0;
-  console.log(data);
-  // console.log(data.map({duration}));
-  // let durations = data.map(({ exercises }) => totalDuration = totalDuration + parseInt(exercises.duration));
   let durations = data.map(({ exercises }) => exercises.map(({duration}) => totalDuration = totalDuration + parseInt(duration)));
 
   console.log(durations);
