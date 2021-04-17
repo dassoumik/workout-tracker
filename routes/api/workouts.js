@@ -42,6 +42,9 @@ router.put("/api/workouts/:id", (req, res) => {
             res.send(error)
         } else {
           console.log(data);
+          if (data.exercises == undefined) {
+             data.exercises = [];
+          }
             data.exercises.push(req.body);
             db.exercise.update(
         {_id: mongojs.ObjectId(req.params.id)},
