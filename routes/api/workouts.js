@@ -7,7 +7,7 @@ const path = require('path');
 const ObjectId = require('mongoose').Types.ObjectId; 
 
 
-const databaseUrl = "Workout";
+const databaseUrl = "workouts";
 const collections = ["exercise"];
 
 const db = mongojs(databaseUrl, collections);
