@@ -100,7 +100,8 @@ async function handleFormSubmit(event) {
   console.log("event", event);
 
   let workoutData = {};
-  workoutData.day = new Date(new Date().setDate(new Date().getDate()));
+  // workoutData.day = new Date(new Date().setDate(new Date().getDate()));
+  // console.log(workoutData.day);
 
   if (workoutType === "cardio") {
     workoutData.type = "cardio";
@@ -116,7 +117,12 @@ async function handleFormSubmit(event) {
     workoutData.duration = Number(resistanceDurationInput.value.trim());
   }
   console.log(workoutData);
+  // if (addButton) {
+  //   await API.createWorkout({"day": new Date(new Date().setDate(new Date().getDate())), 
+  //   "exercises": workoutData });
+  // } else {
   await API.addExercise(workoutData);
+  // }
   clearInputs();
   toast.classList.add("success");
 }

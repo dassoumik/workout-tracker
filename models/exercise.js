@@ -32,7 +32,7 @@ const ExerciseSchema = new Schema({
     type: Number,
     required: false
   },
-  date: {
+  day: {
     type: Date,
     default: Date.now
   }

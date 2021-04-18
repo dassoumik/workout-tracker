@@ -25,7 +25,7 @@ router.get("/api/workouts", (req, res) => {
 });
 
 router.post("/api/workouts", (req, res) => {
-    db.exercise.insert(req.body,
+    db.exercise.insert({day: new Date(new Date().setDate(new Date().getDate() - 0)), exercises: []},
       (error, dbExercise) => {
         if (error) {
             res.send(error);
@@ -42,7 +42,7 @@ router.put("/api/workouts/:id", (req, res) => {
             res.send(error)
         } else {
           console.log(data);
-          if (data.exercises == undefined) {
+          if (data.exercises == undefined || data.exercises == null) {
              data.exercises = [];
           }
             data.exercises.push(req.body);
