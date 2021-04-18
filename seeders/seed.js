@@ -2,7 +2,7 @@ let mongoose = require("mongoose");
 // let db = require("../models");
 const mongojs = require("mongojs");
 
-mongoose.connect("mongodb://localhost/workout", {
+mongoose.connect("mongodb://localhost/workouts", {
   useNewUrlParser: true,
   useFindAndModify: false
 });
@@ -125,7 +125,7 @@ let workoutSeed = [
   }
 ];
 
-const databaseUrl = "Workout";
+const databaseUrl = "workouts";
 const collections = ["exercise"];
 
 const db = mongojs(databaseUrl, collections);
