@@ -91,8 +91,9 @@ router.get("/api/exercise/:id", (req, res) => {
 
 
 router.get("/api/workouts/range", (req, res) => {
-  db.exercise.find({}).skip(db.collection.count() - 7)
-    .sort({ date: -1 },
+  db.exercise.find({})
+    .sort({ day: -1 })
+    .limit(7,
     (error, dbExercise) => {
       if (error) {
           res.send(error);
