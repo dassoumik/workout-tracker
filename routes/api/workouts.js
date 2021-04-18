@@ -1,31 +1,31 @@
 const router = require("express").Router();
 const Exercise = require("../../models/exercise.js");
-const mongojs = require("mongojs");
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
+// const mongojs = require("mongojs");
+// const http = require('http');
+// const fs = require('fs');
+// const path = require('path');
 const ObjectId = require('mongoose').Types.ObjectId; 
 
 
-const databaseUrl = "workouts";
-const collections = ["exercise"];
+// const databaseUrl = "workouts";
+// const collections = ["exercise"];
 
-const db = mongojs(databaseUrl, collections);
+// const db = mongojs(databaseUrl, collections);
 
 router.get("/api/workouts", (req, res) => {
-    db.exercise.find({})
-      .sort({ date: -1 },
-      (error, dbExercise) => {
-        if (error) {
-            res.send(error);
-          } else {
+    Exercise.find({})
+      .sort({ date: -1 })
+      .then(dbExercise => {
+        // if (error) {
+            // res.send(error);
+          // } else {
             res.json(dbExercise);
-          }
-      })
+          })
+      // })
 });
 
 router.post("/api/workouts", (req, res) => {
-    db.exercise.insert({day: new Date(new Date().setDate(new Date().getDate() - 0)), exercises: []},
+    Exercise.insert({day: new Date(new Date().setDate(new Date().getDate() - 0)), exercises: []},
       (error, dbExercise) => {
         if (error) {
             res.send(error);
@@ -37,7 +37,7 @@ router.post("/api/workouts", (req, res) => {
 
 router.put("/api/workouts/:id", (req, res) => {
     console.log(req.param.id);
-    db.exercise.findOne({_id: ObjectId(req.params.id)}, (error, data) => {
+    Exercise.findOne({_id: ObjectId(req.params.id)}, (error, data) => {
         if (error) {
             res.send(error)
         } else {
@@ -46,7 +46,7 @@ router.put("/api/workouts/:id", (req, res) => {
              data.exercises = [];
           }
             data.exercises.push(req.body);
-            db.exercise.update(
+            Exercise.update(
         {_id: mongojs.ObjectId(req.params.id)},
         { $set: {exercises: data.exercises}},
         (error, dbExercise) => {
@@ -76,7 +76,7 @@ router.get("/api/exercise/:id", (req, res) => {
       // res.writeHead(200, { 'Content-Type': 'text/html' });
       // res.sendFile(filename);
       // res.end(data);
-    // db.exercise.find({id: req.params.id}, (error, data) => {
+    // Exercise.find({id: req.params.id}, (error, data) => {
     //     if (error) {
     //         res.send(error)
     //     } else {
@@ -91,7 +91,7 @@ router.get("/api/exercise/:id", (req, res) => {
 
 
 router.get("/api/workouts/range", (req, res) => {
-  db.exercise.find({})
+  Exercise.find({})
     .sort({ day: -1 })
     .limit(7,
     (error, dbExercise) => {

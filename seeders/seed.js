@@ -1,6 +1,7 @@
 let mongoose = require("mongoose");
 // let db = require("../models");
-const mongojs = require("mongojs");
+// const mongojs = require("mongojs");
+const Exercise = require("../models/exercise");
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workouts", {
   useNewUrlParser: true,
@@ -125,17 +126,17 @@ let workoutSeed = [
   }
 ];
 
-const databaseUrl = "workouts";
-const collections = ["exercise"];
+// const databaseUrl = "workouts";
+// const collections = ["exercise"];
 
-const db = mongojs(databaseUrl, collections);
+// const db = mongojs(databaseUrl, collections);
 
-db.on("error", error => {
-  console.log("Database Error:", error);
-});
+// db.on("error", error => {
+//   console.log("Database Error:", error);
+// });
 
-db.exercise.remove({});
-db.exercise.insertMany(workoutSeed, (err, data) => {
+Exercise.remove({});
+Exercise.insertMany(workoutSeed, (err, data) => {
   if (err) {
     console.error(err);
   } else {
