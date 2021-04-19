@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const Exercise = require("../../models/exercise.js");
-// const mongojs = require("mongojs");
+const mongojs = require("mongojs");
 // const http = require('http');
 // const fs = require('fs');
 // const path = require('path');
@@ -25,13 +25,14 @@ router.get("/api/workouts", (req, res) => {
 });
 
 router.post("/api/workouts", (req, res) => {
-    Exercise.insert({day: new Date(new Date().setDate(new Date().getDate() - 0)), exercises: []},
-      (error, dbExercise) => {
-        if (error) {
-            res.send(error);
-          } else {
+  // const instance = new Exercise({day: new Date(new Date().setDate(new Date().getDate() - 0)), exercises: []});
+    Exercise.create({day: new Date(new Date().setDate(new Date().getDate() - 0)), exercises: []}).then(
+      dbExercise => {
             res.json(dbExercise);
           }
+      )
+      .catch(err => {
+        res.status(404).json(err);
       })
 });
 
@@ -91,13 +92,18 @@ router.get("/api/exercise/:id", (req, res) => {
 
 
 router.get("/api/workouts/range", (req, res) => {
-  Exercise.find({})
-    .sort({ day: -1 })
-    .limit(7,
+  console.log("in range server fn");
+  Exercise.find({}).sort({ day: -1 }).limit(7).exec(
+
+  
     (error, dbExercise) => {
+  console.log("in range server fn afetr sort limit");
+
       if (error) {
+        console.error(error);
           res.send(error);
         } else {
+          console.log(dbExercise);
           res.json(dbExercise);
         }
     })

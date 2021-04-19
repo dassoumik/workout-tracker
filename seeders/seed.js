@@ -5,7 +5,8 @@ const Exercise = require("../models/exercise");
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workouts", {
   useNewUrlParser: true,
-  useFindAndModify: false
+  useFindAndModify: false,
+  useUnifiedTopology: true 
 });
 
 let workoutSeed = [
@@ -134,7 +135,7 @@ let workoutSeed = [
 // db.on("error", error => {
 //   console.log("Database Error:", error);
 // });
-
+// const addSeeds = async () => {
 Exercise.remove({});
 Exercise.insertMany(workoutSeed, (err, data) => {
   if (err) {
@@ -146,3 +147,6 @@ Exercise.insertMany(workoutSeed, (err, data) => {
   
 process.exit(1);
 });
+// addSeeds();
+// }
+
