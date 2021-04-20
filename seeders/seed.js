@@ -1,6 +1,4 @@
 let mongoose = require("mongoose");
-// let db = require("../models");
-// const mongojs = require("mongojs");
 const Exercise = require("../models/exercise");
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workouts", {
@@ -127,15 +125,7 @@ let workoutSeed = [
   }
 ];
 
-// const databaseUrl = "workouts";
-// const collections = ["exercise"];
 
-// const db = mongojs(databaseUrl, collections);
-
-// db.on("error", error => {
-//   console.log("Database Error:", error);
-// });
-// const addSeeds = async () => {
 Exercise.remove({});
 Exercise.insertMany(workoutSeed, (err, data) => {
   if (err) {
@@ -147,6 +137,4 @@ Exercise.insertMany(workoutSeed, (err, data) => {
   
 process.exit(1);
 });
-// addSeeds();
-// }
 

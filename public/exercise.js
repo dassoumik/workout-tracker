@@ -100,8 +100,6 @@ async function handleFormSubmit(event) {
   console.log("event", event);
 
   let workoutData = {};
-  // workoutData.day = new Date(new Date().setDate(new Date().getDate()));
-  // console.log(workoutData.day);
 
   if (workoutType === "cardio") {
     workoutData.type = "cardio";
@@ -116,13 +114,8 @@ async function handleFormSubmit(event) {
     workoutData.reps = Number(repsInput.value.trim());
     workoutData.duration = Number(resistanceDurationInput.value.trim());
   }
-  console.log(workoutData);
-  // if (addButton) {
-  //   await API.createWorkout({"day": new Date(new Date().setDate(new Date().getDate())), 
-  //   "exercises": workoutData });
-  // } else {
+  
   await API.addExercise(workoutData);
-  // }
   clearInputs();
   toast.classList.add("success");
 }
@@ -162,3 +155,7 @@ toast.addEventListener("animationend", handleToastAnimationEnd);
 document
   .querySelectorAll("input")
   .forEach(element => element.addEventListener("input", validateInputs));
+// window.onbeforeunload = function() {
+//   console.log("beforeLeave", location.search.split("?id=")[1]);
+//   API.deleteExercise(location.search.split("?id=")[1]);
+// }

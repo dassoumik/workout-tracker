@@ -429,7 +429,7 @@ form > button {
   padding: 10px;
 }
 
-nav ul {
+nav ul li {
   
     list-style-type: none;
     margin: 0;

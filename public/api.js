@@ -7,7 +7,7 @@ const API = {
       console.log(err)
     }
     const json = await res.json();
-    console.log(json);
+    // console.log(json);
 
     return json[json.length - 1];
   },
@@ -47,4 +47,11 @@ const API = {
 
     return json;
   },
+
+  // async deleteExercise(id) {
+  //   console.log(id);
+  //   const res = await fetch(`/api/workouts/delete/${id}`, {
+  //     method: 'DELETE',
+  //   });
+  // }
 };
